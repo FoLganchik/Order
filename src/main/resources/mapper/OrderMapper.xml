@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ru.mis.order.mapper.IOrderMapper">
+    <resultMap id="BaseResultMap" type="ru.mis.order.model.Order">
+        <result column="id" property="id"/>
+        <result column="order_status_id" property="order_status_id"/>
+        <result column="customer_name" property="customer_name"/>
+        <result column="customer_phone" property="customer_phone"/>
+        <result column="customer_comment" property="customer_comment"/>
+    </resultMap>
+
+    <parameterMap id="Order" type="ru.mis.order.model.Order"/>
+
+    <sql id="Base_Column_List">
+        id, order_status_id, customer_name, customer_phone, customer_comment
+    </sql>
+
+    <insert id="create" parameterMap="Order" useGeneratedKeys="true" keyProperty="id">
+        insert into order(order_status_id, customer_name, customer_phone, customer_comment)
+        values(#{order_status_id}, #{customer_name}, #{customer_phone}, #{customer_comment})
+    </insert>
+
+    <select id="readAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order
+    </select>
+
+    <select id="read" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_list"/>
+        from order
+        where id = #{id}
+    </select>
+
+    <update id="update" parameterMap="Order">
+        update user
+        set
+        <if test="order_status_id!=null">
+            order_status_id = #{order_status_id},
+        </if>
+        <if test="customer_name!=null">
+            customer_name = #{customer_name},
+        </if>
+        <if test="customer_phone!=null">
+            customer_phone = #{customer_phone}
+        </if>
+        <if test="customer_comment!=null">
+            customer_comment = #{customer_comment}
+        </if>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from order
+        where id = #{id}
+    </delete>
+
+</mapper>
