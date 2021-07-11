@@ -16,9 +16,9 @@ import java.io.IOException;
 @Configuration
 @PropertySource(value = "classpath:application.properties")
 public class SessionFactoryConfig {
-    @Value("${mybatis.config-locations}")
+    @Value("${mybatis.config-location}")
     private String mybatisConfigFilePath;
-    @Value("${mybatis.mapper-locations}")
+    @Value("${mybatis.mapper-location}")
     private String mapperPath;
     @Value("{mybatis.type-aliases-package}")
     private String entityPackage;
@@ -34,7 +34,7 @@ public class SessionFactoryConfig {
         sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(mybatisConfigFilePath)); // сканировать файл конфигурации mybatis;
         // Установить информацию о соединении с базой данных
         sqlSessionFactoryBean.setDataSource(dataSource);
-        // Установить путь сканирования файла XML, соответствующего mappe r mapper
+        // Установить путь сканирования файла XML, соответствующего mapper
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         String packageSearchPath = PathMatchingResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + mapperPath;
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources(packageSearchPath));
