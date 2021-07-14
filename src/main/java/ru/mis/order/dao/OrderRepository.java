@@ -1,12 +1,10 @@
-package ru.mis.order.mapper;
+package ru.mis.order.dao;
 
-import org.springframework.stereotype.Component;
 import ru.mis.order.model.Order;
 
 import java.util.List;
 
-@Component
-public interface IOrderMapper {
+public interface OrderRepository {
 
     Integer create(Order order);
 

@@ -1,10 +1,13 @@
-package ru.mis.order.service;
+package ru.mis.order.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import ru.mis.order.model.Order;
 
 import java.util.List;
 
-public interface IOrderService {
+@Mapper
+public interface OrderMapper {
+
     Integer create(Order order);
 
     List<Order> readAll();
