@@ -17,29 +17,29 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
     public String createOrder(@ModelAttribute Order order) {
         Integer create = orderService.create(order);
         return "success";
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
     public List<Order> readAllOrder() {
         return orderService.readAll();
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
     public Order readOrder(@PathVariable("id") Integer id) {
         return orderService.read(id);
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
     public String updateOrder(@PathVariable("id") Integer id, @ModelAttribute Order order) {
         Integer updateOrder = orderService.update(order);
         return "success";
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
     public String deleteOrder(@PathVariable("id") Integer id) {
         Integer deleteOrder = orderService.delete(id);
         return "success";

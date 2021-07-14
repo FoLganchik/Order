@@ -20,7 +20,7 @@ public class SessionFactoryConfig {
     private String mybatisConfigFilePath;
     @Value("${mybatis.mapper-location}")
     private String mapperPath;
-    @Value("{mybatis.type-aliases-package}")
+    @Value("${mybatis.type-aliases-package}")
     private String entityPackage;
     private final DataSource dataSource;
 

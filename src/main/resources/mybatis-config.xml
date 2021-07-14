@@ -19,6 +19,6 @@
     </typeAliases>
 
     <mappers>
-        <mapper resource="OrderMapper.xml"/>
+        <mapper resource="mapper/OrderMapper.xml"/>
     </mappers>
 </configuration>
