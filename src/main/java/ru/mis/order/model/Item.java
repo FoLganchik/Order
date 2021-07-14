@@ -1,17 +1,9 @@
 package ru.mis.order.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "order_item")
 public class Item {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
+
     private Integer id;
-    @Column(name = "order_id")
     private Integer order_id;
-    @Column(name = "item_name")
     private String item_name;
 
     public Integer getId() {
@@ -36,5 +28,13 @@ public class Item {
 
     public void setName(String item_name) {
         this.item_name = item_name;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{ " +
+                "id = " + id +
+                ", item_name = '" + item_name + '\'' +
+                '}';
     }
 }

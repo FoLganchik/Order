@@ -1,26 +1,15 @@
 package ru.mis.order.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
 
-@Entity
-@Table(name = "order")
-public class Order implements Serializable {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
+public class Order {
+
     private Integer id;
-    @Column(name = "order_status_id")
     private Integer order_status_id;
-    @Column(name = "customer_name")
     private String customer_name;
-    @Column(name = "customer_phone")
     private String customer_phone;
-    @Column(name = "customer_comment")
     private String customer_comment;
-    @OneToMany
-    private Set<Item> items;
+    private ArrayList<Item> items;
 
     public Integer getId() {
         return id;
@@ -62,11 +51,11 @@ public class Order implements Serializable {
         this.customer_comment = customer_comment;
     }
 
-    public Set<Item> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void setItems(Set<Item> items) {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 
