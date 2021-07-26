@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ru.mis.order.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="ru.mis.order.model.Order">
+    <resultMap id="OrderMap" type="ru.mis.order.model.Order">
         <result column="id" property="id"/>
-        <result column="order_status_id" property="order_status_id"/>
-        <result column="customer_name" property="customer_name"/>
-        <result column="customer_phone" property="customer_phone"/>
-        <result column="customer_comment" property="customer_comment"/>
+        <result column="order_status_id" property="orderStatusId"/>
+        <result column="customer_name" property="customerName"/>
+        <result column="customer_phone" property="customerPhone"/>
+        <result column="customer_comment" property="customerComment"/>
+        <collection property="items" resultMap="OrderItemMap" columnPrefix="oi_"/>
     </resultMap>
-
-    <parameterMap id="Order" type="ru.mis.order.model.Order"/>
+    
+    <resultMap id="OrderItemMap" type="ru.mis.order.model.Item">
+        <result column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="item_name" property="itemName"/>
+    </resultMap>
 
     <sql id="Base_Column_List">
         id, order_status_id, customer_name, customer_phone, customer_comment
     </sql>
 
-    <insert id="create" parameterMap="Order" useGeneratedKeys="true" keyProperty="id">
+    <insert id="create" parameterType="ru.mis.order.model.Order" useGeneratedKeys="true" keyProperty="id">
         insert into order(order_status_id, customer_name, customer_phone, customer_comment)
-        values(#{order_status_id}, #{customer_name}, #{customer_phone}, #{customer_comment})
+        values(#{orderStatusId}, #{customerName}, #{customerPhone}, #{customerComment})
     </insert>
 
-    <select id="readAll" resultMap="BaseResultMap">
+    <select id="readAll" resultMap="OrderMap">
         select
         <include refid="Base_Column_List"/>
-        from order
+        from order ord
+        inner join order_item oi on oi.order_id = ord.id
     </select>
 
-    <select id="read" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="read" resultMap="OrderMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_list"/>
-        from order
+        from order ord
+        inner join order_item oi on oi.order_id = ord.id
         where id = #{id}
     </select>
 
-    <update id="update" parameterMap="Order">
+    <update id="update" parameterType="ru.mis.order.model.Order">
         update user
         set
         <if test="order_status_id!=null">
-            order_status_id = #{order_status_id},
+            order_status_id = #{orderStatusId},
         </if>
         <if test="customer_name!=null">
-            customer_name = #{customer_name},
+            customer_name = #{customerName},
         </if>
         <if test="customer_phone!=null">
-            customer_phone = #{customer_phone}
+            customer_phone = #{customerPhone}
         </if>
         <if test="customer_comment!=null">
-            customer_comment = #{customer_comment}
+            customer_comment = #{customerComment}
         </if>
         where id = #{id}
     </update>
