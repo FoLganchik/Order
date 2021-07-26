@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Order {
 
     private Integer id;
-    private Integer order_status_id;
-    private String customer_name;
-    private String customer_phone;
-    private String customer_comment;
+    private Integer orderStatusId;
+    private String customerName;
+    private String customerPhone;
+    private String customerComment;
     private ArrayList<Item> items;
 
     public Integer getId() {
@@ -19,36 +19,36 @@ public class Order {
         this.id = id;
     }
 
-    public Integer getOrder_status_id() {
-        return order_status_id;
+    public Integer getOrderStatusId() {
+        return orderStatusId;
     }
 
-    public void setOrder_status_id(Integer order_status_id) {
-        this.order_status_id = order_status_id;
+    public void setOrderStatusId(Integer orderStatusId) {
+        this.orderStatusId = orderStatusId;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustomer_name(String customer_name) {
-        this.customer_name = customer_name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getCustomer_phone() {
-        return customer_phone;
+    public String getCustomerPhone() {
+        return customerPhone;
     }
 
-    public void setCustomer_phone(String customer_phone) {
-        this.customer_phone = customer_phone;
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
     }
 
-    public String getCustomer_comment() {
-        return customer_comment;
+    public String getCustomerComment() {
+        return customerComment;
     }
 
-    public void setCustomer_comment(String customer_comment) {
-        this.customer_comment = customer_comment;
+    public void setCustomerComment(String customerComment) {
+        this.customerComment = customerComment;
     }
 
     public ArrayList<Item> getItems() {
@@ -63,10 +63,10 @@ public class Order {
     public String toString() {
         return "Order {" +
                 "id = " + id +
-                ", order_status_id = " + order_status_id +
-                ", customer_name = '" + customer_name + '\'' +
-                ", customer_phone = '" + customer_phone + '\'' +
-                ", customer_comment = '" + customer_comment + '\'' +
+                ", order_status_id = " + orderStatusId +
+                ", customer_name = '" + customerName + '\'' +
+                ", customer_phone = '" + customerPhone + '\'' +
+                ", customer_comment = '" + customerComment + '\'' +
                 '}';
     }
 }

@@ -3,8 +3,8 @@ package ru.mis.order.model;
 public class Item {
 
     private Integer id;
-    private Integer order_id;
-    private String item_name;
+    private Integer orderId;
+    private String itemName;
 
     public Integer getId() {
         return id;
@@ -14,27 +14,27 @@ public class Item {
         this.id = id;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public String getName() {
-        return item_name;
+        return itemName;
     }
 
-    public void setName(String item_name) {
-        this.item_name = item_name;
+    public void setName(String itemName) {
+        this.itemName = itemName;
     }
 
     @Override
     public String toString() {
         return "Item{ " +
                 "id = " + id +
-                ", item_name = '" + item_name + '\'' +
+                ", item_name = '" + itemName + '\'' +
                 '}';
     }
 }
