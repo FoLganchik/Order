@@ -7,6 +7,7 @@ import ru.mis.order.service.OrderService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class OrderController {
 
