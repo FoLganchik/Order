@@ -3,46 +3,47 @@ package ru.mis.order.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.mis.order.model.Order;
-import ru.mis.order.service.OrderService;
+import ru.mis.order.service.OrderServiceImpl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class OrderController {
 
-    private final OrderService orderService;
+    private final OrderServiceImpl orderServiceImpl;
 
     @Autowired
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
+    public OrderController(OrderServiceImpl orderServiceImpl) {
+        this.orderServiceImpl = orderServiceImpl;
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
-    public String createOrder(@ModelAttribute Order order) {
-        Integer create = orderService.create(order);
+    public String create(@ModelAttribute Order order) throws InvocationTargetException {
+        Integer createOrder = orderServiceImpl.create(order);
         return "success";
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public List<Order> readAllOrder() {
-        return orderService.readAll();
+    public List<Order> readAll() {
+        return orderServiceImpl.readAll();
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
-    public Order readOrder(@PathVariable("id") Integer id) {
-        return orderService.read(id);
+    public Order read(@PathVariable("id") Integer id) {
+        return orderServiceImpl.read(id);
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
-    public String updateOrder(@PathVariable("id") Integer id, @ModelAttribute Order order) {
-        Integer updateOrder = orderService.update(order);
+    public String update(@PathVariable("id") Integer id, @ModelAttribute Order order) {
+        Integer updateOrder = orderServiceImpl.update(order);
         return "success";
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
-    public String deleteOrder(@PathVariable("id") Integer id) {
-        Integer deleteOrder = orderService.delete(id);
+    public String delete(@PathVariable("id") Integer id) {
+        Integer deleteOrder = orderServiceImpl.delete(id);
         return "success";
     }
 }

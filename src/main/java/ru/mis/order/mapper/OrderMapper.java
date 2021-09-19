@@ -12,9 +12,9 @@ public interface OrderMapper {
 
     List<Order> readAll();
 
-    Order read(int id);
+    Order read(Integer id);
 
     Integer update(Order order);
 
-    Integer delete(int id);
+    Integer delete(Integer id);
 }

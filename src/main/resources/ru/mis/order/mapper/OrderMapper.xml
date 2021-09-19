@@ -21,21 +21,19 @@
     </sql>
 
     <insert id="create" parameterType="ru.mis.order.model.Order" useGeneratedKeys="true" keyProperty="id">
-        insert into order(order_status_id, customer_name, customer_phone, customer_comment)
+        insert into "order"(order_status_id, customer_name, customer_phone, customer_comment)
         values(#{orderStatusId}, #{customerName}, #{customerPhone}, #{customerComment})
     </insert>
 
     <select id="readAll" resultMap="OrderMap">
-        select
-        <include refid="Base_Column_List"/>
+        select id, order_status_id, customer_name, customer_phone, customer_comment
         from order ord
         inner join order_item oi on oi.order_id = ord.id
     </select>
 
     <select id="read" resultMap="OrderMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_list"/>
-        from order ord
+        select id, order_status_id, customer_name, customer_phone, customer_comment
+        from "order" ord
         inner join order_item oi on oi.order_id = ord.id
         where id = #{id}
     </select>
