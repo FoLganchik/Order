@@ -1,6 +1,7 @@
 package ru.mis.order.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import ru.mis.order.model.Order;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface OrderMapper {
 
     Order read(Integer id);
 
-    Integer update(Order order);
+    Integer update(@Param("ord") Order order);
 
     Integer delete(Integer id);
 }

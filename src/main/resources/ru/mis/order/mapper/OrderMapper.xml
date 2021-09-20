@@ -41,24 +41,16 @@
     <update id="update" parameterType="ru.mis.order.model.Order">
         update "order"
         set
-        <if test="order_status_id!=null">
-            order_status_id = #{orderStatusId},
-        </if>
-        <if test="customer_name!=null">
-            customer_name = #{customerName},
-        </if>
-        <if test="customer_phone!=null">
-            customer_phone = #{customerPhone}
-        </if>
-        <if test="customer_comment!=null">
-            customer_comment = #{customerComment}
-        </if>
-        where id = #{id}
+            order_status_id = #{ord.orderStatusId},
+            customer_name = #{ord.customerName},
+            customer_phone = #{ord.customerPhone},
+            customer_comment = #{ord.customerComment}
+        where id = #{ord.id}
     </update>
 
     <delete id="delete" parameterType="java.lang.Integer">
-        delete from order
-        where id = #{id}
+        delete from "order" as ord
+        where ord.id = #{id}
     </delete>
 
 </mapper>
