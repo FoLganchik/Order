@@ -26,20 +26,20 @@
     </insert>
 
     <select id="readAll" resultMap="OrderMap">
-        select id, order_status_id, customer_name, customer_phone, customer_comment
-        from order ord
-        inner join order_item oi on oi.order_id = ord.id
+        select ord.id, order_status_id, customer_name, customer_phone, customer_comment
+        from "order" as ord
+        inner join order_item as oi on oi.order_id = ord.id
     </select>
 
     <select id="read" resultMap="OrderMap" parameterType="java.lang.Integer">
-        select id, order_status_id, customer_name, customer_phone, customer_comment
-        from "order" ord
-        inner join order_item oi on oi.order_id = ord.id
-        where id = #{id}
+        select ord.id, order_status_id, customer_name, customer_phone, customer_comment
+        from "order" as ord
+        inner join order_item as oi on oi.order_id = ord.id
+        where ord.id = #{id}
     </select>
 
     <update id="update" parameterType="ru.mis.order.model.Order">
-        update user
+        update "order"
         set
         <if test="order_status_id!=null">
             order_status_id = #{orderStatusId},
