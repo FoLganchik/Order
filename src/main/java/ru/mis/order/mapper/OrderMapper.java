@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
 
-    Integer create(Order order);
+	void create(@Param("ord") Order order);
 
     List<Order> readAll();
 

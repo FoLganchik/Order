@@ -16,13 +16,9 @@
         <result column="item_name" property="itemName"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id, order_status_id, customer_name, customer_phone, customer_comment
-    </sql>
-
     <insert id="create" parameterType="ru.mis.order.model.Order" useGeneratedKeys="true" keyProperty="id">
         insert into "order"(order_status_id, customer_name, customer_phone, customer_comment)
-        values(#{orderStatusId}, #{customerName}, #{customerPhone}, #{customerComment})
+        values(#{ord.orderStatusId}, #{ord.customerName}, #{ord.customerPhone}, #{ord.customerComment})
     </insert>
 
     <select id="readAll" resultMap="OrderMap">

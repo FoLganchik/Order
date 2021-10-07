@@ -18,8 +18,8 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Integer create(Order order) {
-        return orderRepository.create(order);
+    public void create(Order order) {
+        orderRepository.create(order);
     }
 
     @Override

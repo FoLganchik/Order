@@ -22,19 +22,11 @@ public class Item {
         this.orderId = orderId;
     }
 
-    public String getName() {
+    public String getItemName() {
         return itemName;
     }
 
-    public void setName(String itemName) {
+    public void setItemName(String itemName) {
         this.itemName = itemName;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{ " +
-                "id = " + id +
-                ", item_name = '" + itemName + '\'' +
-                '}';
     }
 }

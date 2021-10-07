@@ -24,9 +24,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
-    public String create(@ModelAttribute Order order) throws InvocationTargetException {
-        Integer createOrder = orderServiceImpl.create(order);
-        return "success";
+    public Order create(@RequestBody Order order) throws InvocationTargetException {
+    	orderServiceImpl.create(order);
+		return order;
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
@@ -36,18 +36,19 @@ public class OrderController {
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
     public Order read(@PathVariable("id") Integer id) {
-        return orderServiceImpl.read(id);
+        Order readOrder = orderServiceImpl.read(id);
+        return readOrder;
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
-    public String update(@PathVariable("id") Integer id, @ModelAttribute Order order) {
-        Integer updateOrder = orderServiceImpl.update(order);
-        return "success";
+    public Integer update(@PathVariable("id") Integer id, @ModelAttribute Order order) {
+    	Integer updateOrder = orderServiceImpl.update(order);
+        return updateOrder;
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Integer id) {
-        Integer deleteOrder = orderServiceImpl.delete(id);
+        orderServiceImpl.delete(id);
         return "success";
     }
 }

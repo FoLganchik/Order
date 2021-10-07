@@ -58,15 +58,4 @@ public class Order {
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
-
-    @Override
-    public String toString() {
-        return "Order {" +
-                "id = " + id +
-                ", order_status_id = " + orderStatusId +
-                ", customer_name = '" + customerName + '\'' +
-                ", customer_phone = '" + customerPhone + '\'' +
-                ", customer_comment = '" + customerComment + '\'' +
-                '}';
-    }
 }

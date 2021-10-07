@@ -18,8 +18,8 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public Integer create(Order order) {
-        return orderMapper.create(order);
+    public void create(Order order) {
+        orderMapper.create(order);
     }
 
     @Override
