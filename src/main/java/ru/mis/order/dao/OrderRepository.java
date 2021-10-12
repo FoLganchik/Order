@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderRepository {
 
-	void create(Order order);
+	void createOrder(Order order);
 
     List<Order> readAll();
 

@@ -3,6 +3,7 @@ package ru.mis.order.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.mis.order.dao.OrderRepositoryImpl;
+import ru.mis.order.model.Item;
 import ru.mis.order.model.Order;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public void create(Order order) {
-        orderRepository.create(order);
+    public void createOrder(Order order) {
+        orderRepository.createOrder(order);
     }
 
     @Override

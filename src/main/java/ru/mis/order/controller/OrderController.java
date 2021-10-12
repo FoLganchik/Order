@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.mis.order.model.Order;
 import ru.mis.order.service.OrderServiceImpl;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 //
@@ -24,8 +22,8 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
-    public Order create(@RequestBody Order order) throws InvocationTargetException {
-    	orderServiceImpl.create(order);
+    public Order createOrder(@RequestBody Order order) {
+    	orderServiceImpl.createOrder(order);
 		return order;
     }
 
@@ -36,14 +34,12 @@ public class OrderController {
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
     public Order read(@PathVariable("id") Integer id) {
-        Order readOrder = orderServiceImpl.read(id);
-        return readOrder;
+        return orderServiceImpl.read(id);
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
     public Integer update(@PathVariable("id") Integer id, @ModelAttribute Order order) {
-    	Integer updateOrder = orderServiceImpl.update(order);
-        return updateOrder;
+        return orderServiceImpl.update(order);
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
