@@ -2,7 +2,9 @@ package ru.mis.order.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.mis.order.mapper.OrderMapper;
+import ru.mis.order.model.Item;
 import ru.mis.order.model.Order;
 
 import java.util.List;
@@ -17,9 +19,13 @@ public class OrderRepositoryImpl implements OrderRepository {
         this.orderMapper = orderMapper;
     }
 
-    @Override
-    public void create(Order order) {
-        orderMapper.create(order);
+    @Transactional
+    public void createOrder(Order order) {
+        orderMapper.createOrder(order);
+        for(Item items : order.getItems()){
+            items.setOrderId(order.getId());
+            orderMapper.createItem(items);
+        }
     }
 
     @Override
