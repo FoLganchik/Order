@@ -16,9 +16,14 @@
         <result column="item_name" property="itemName"/>
     </resultMap>
 
-    <insert id="create" parameterType="ru.mis.order.model.Order" useGeneratedKeys="true" keyProperty="id">
+    <insert id="createOrder" parameterType="ru.mis.order.model.Order" useGeneratedKeys="true" keyProperty="id">
         insert into "order"(order_status_id, customer_name, customer_phone, customer_comment)
         values(#{ord.orderStatusId}, #{ord.customerName}, #{ord.customerPhone}, #{ord.customerComment})
+    </insert>
+
+    <insert id="createItem" parameterType="ru.mis.order.model.Item" useGeneratedKeys="true" keyProperty="id">
+        insert into order_item(order_id, item_name)
+        values(#{oi.orderId}, #{oi.itemName})
     </insert>
 
     <select id="readAll" resultMap="OrderMap">
