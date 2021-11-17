@@ -35,7 +35,7 @@
     <select id="read" resultMap="OrderMap" parameterType="java.lang.Integer">
         select ord.id, order_status_id, customer_name, customer_phone, customer_comment
         from "order" as ord
-        inner join order_item as oi on oi.order_id = ord.id
+        inner join order_item as oi on (oi.order_id = ord.id)
         where ord.id = #{id}
     </select>
 
