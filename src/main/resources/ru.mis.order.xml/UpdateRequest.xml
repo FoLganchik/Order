@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf8" ?>
+<order>
+    <id>100001</id>
+    <orderStatusId>1</orderStatusId>
+    <customerName>John Doe</customerName>
+    <customerPhone>+7-905-345-4523</customerPhone>
+    <customerComment>Please call me back</customerComment>
+    <items>
+        <item>
+            <id>1000</id>
+            <orderId>100001</orderId>
+            <itemName>Item #1</itemName>
+        </item>
+        <item>
+            <id>1001</id>
+            <orderId>100001</orderId>
+            <itemName>Item #2</itemName>
+        </item>
+        <item>
+            <id>1002</id>
+            <orderId>100001</orderId>
+            <itemName>Item #3</itemName>
+        </item>
+    </items>
+</order>
