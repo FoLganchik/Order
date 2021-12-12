@@ -39,7 +39,7 @@
         where ord.id = #{id}
     </select>
 
-    <update id="update" parameterType="ru.mis.order.model.Order">
+    <update id="updateOrder" parameterType="ru.mis.order.model.Order">
         update "order"
         set
             order_status_id = #{ord.orderStatusId},
@@ -49,8 +49,16 @@
         where id = #{ord.id}
     </update>
 
+    <update id="updateItem" parameterType="ru.mis.order.model.Item">
+        update order_item
+        set
+            item_name = #{oi.itemName}
+        where id = #{oi.id}
+    </update>
+
     <delete id="delete" parameterType="java.lang.Integer">
-        delete from "order" as ord
+        delete
+        from "order" as ord
         where ord.id = #{id}
     </delete>
 

@@ -38,13 +38,12 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
-    public Integer update(@PathVariable("id") Integer id, @ModelAttribute Order order) {
-        return orderServiceImpl.update(order);
+    public void update(@PathVariable("id") Integer id, @ModelAttribute Order order) {
+        orderServiceImpl.update(order);
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
-    public String delete(@PathVariable("id") Integer id) {
+    public void delete(@PathVariable("id") Integer id) {
         orderServiceImpl.delete(id);
-        return "success";
     }
 }

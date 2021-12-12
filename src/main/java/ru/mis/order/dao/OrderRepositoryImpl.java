@@ -22,7 +22,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Transactional
     public void createOrder(Order order) {
         orderMapper.createOrder(order);
-        for(Item items : order.getItems()){
+        for (Item items : order.getItems()) {
             items.setOrderId(order.getId());
             orderMapper.createItem(items);
         }
@@ -38,13 +38,16 @@ public class OrderRepositoryImpl implements OrderRepository {
         return orderMapper.read(id);
     }
 
-    @Override
-    public Integer update(Order order) {
-        return orderMapper.update(order);
+    @Transactional
+    public void update(Order order) {
+        orderMapper.updateOrder(order);
+        for (Item items : order.getItems()) {
+            orderMapper.updateItem(items);
+        }
     }
 
     @Override
-    public Integer delete(int id) {
-        return orderMapper.delete(id);
+    public void delete(int id) {
+        orderMapper.delete(id);
     }
 }

@@ -34,12 +34,12 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Integer update(Order order) {
-        return orderRepository.update(order);
+    public void update(Order order) {
+        orderRepository.update(order);
     }
 
     @Override
-    public Integer delete(int id) {
-        return orderRepository.delete(id);
+    public void delete(int id) {
+        orderRepository.delete(id);
     }
 }

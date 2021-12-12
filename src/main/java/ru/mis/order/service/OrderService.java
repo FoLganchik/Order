@@ -12,7 +12,7 @@ public interface OrderService {
 
     Order read(int id);
 
-    Integer update(Order order);
+    void update(Order order);
 
-    Integer delete(int id);
+    void delete(int id);
 }
