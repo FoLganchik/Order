@@ -19,6 +19,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 public class ProcessOrderServlet extends HttpServlet {
 
     private Node itemsNode;
-    private final Order order = new Order();
+    private Order order = new Order();
     private final ArrayList<Item> items = new ArrayList<>();
     private final OrderServiceImpl orderServiceImpl;
 
@@ -35,12 +36,54 @@ public class ProcessOrderServlet extends HttpServlet {
         this.orderServiceImpl = orderServiceImpl;
     }
 
-//    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        super.service(request, response);
-//    }
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(request.getMethod());
+        switch (request.getMethod()) {
+            case "GET": {
+                doGet(request, response);
+                break;
+            }
+            case "POST": {
+                doPost(request, response);
+                break;
+            }
+            case "PUT": {
+                doPut(request, response);
+                break;
+            }
+            case "DELETE": {
+                doDelete(request, response);
+                break;
+            }
+        }
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            PrintWriter writer = response.getWriter();
+            NodeList rootChild = getChildNodes(request);
 
+            for (int i = 0; i < rootChild.getLength(); i++) {
+                if (rootChild.item(i).getNodeType() != Node.ELEMENT_NODE) {
+                    continue;
+                }
+
+                if ((rootChild.item(i).getNodeName()).equals("id")) {
+                    order.setId(Integer.valueOf(rootChild.item(i).getTextContent()));
+                }
+                order = orderServiceImpl.read(order.getId());
+                writer.println();
+                writer.println(order.getOrderStatusId());
+                writer.println(order.getCustomerName());
+                writer.println(order.getCustomerPhone());
+                writer.println(order.getCustomerComment());
+                for (Item item : order.getItems()) {
+                    writer.println(item.getItemName());
+                }
+            }
+        } catch (ParserConfigurationException | SAXException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,18 +99,23 @@ public class ProcessOrderServlet extends HttpServlet {
                 switch (rootChild.item(i).getNodeName()) {
                     case "orderStatusId": {
                         order.setOrderStatusId(Integer.valueOf(rootChild.item(i).getTextContent()));
+                        break;
                     }
                     case "customerName": {
                         order.setCustomerName(rootChild.item(i).getTextContent());
+                        break;
                     }
                     case "customerPhone": {
                         order.setCustomerPhone(rootChild.item(i).getTextContent());
+                        break;
                     }
                     case "customerComment": {
                         order.setCustomerComment(rootChild.item(i).getTextContent());
+                        break;
                     }
                     case "items": {
                         itemsNode = rootChild.item(i);
+                        break;
                     }
                 }
             }
@@ -81,7 +129,6 @@ public class ProcessOrderServlet extends HttpServlet {
                 item.setItemName(itemsList.item(i).getTextContent());
                 items.add(item);
             }
-            System.out.println(" check  " + items.get(0).getItemName() + "  " + items.get(1).getItemName());
             order.setItems(items);
 
         } catch (SAXException | ParserConfigurationException e) {
@@ -170,7 +217,28 @@ public class ProcessOrderServlet extends HttpServlet {
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            NodeList rootChild = getChildNodes(request);
 
+            for (int i = 0; i < rootChild.getLength(); i++) {
+                if (rootChild.item(i).getNodeType() != Node.ELEMENT_NODE) {
+                    continue;
+                }
+
+                if (!(rootChild.item(i).getNodeName()).equals("id")) {
+                    continue;
+                }
+                orderServiceImpl.delete(Integer.parseInt(rootChild.item(i).getTextContent()));
+            }
+        } catch (ParserConfigurationException | SAXException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private NodeList getChildNodes(HttpServletRequest request) throws IOException, ParserConfigurationException, SAXException {
+        String data = requestBuffer(request);
+        Node root = buildDocument(data).getDocumentElement();
+        return root.getChildNodes();
     }
 
     private Document buildDocument(String data) throws ParserConfigurationException, IOException, SAXException {
